@@ -7,17 +7,17 @@ use gio::prelude::*;
 use std::env::args;
 
 fn build_ui(application: &gtk::Application) {
-	let vbox = gtk::Box::new(gtk::Orientation::Vertical, 0);
 
 	let stack = gtk::Stack::new();
 	stack.set_transition_type(gtk::StackTransitionType::SlideLeftRight);
-	stack.set_transition_duration(1000);
+	stack.set_transition_duration(500);
 	
-	let value_button = gtk::Button::new();
-	let graph_button = gtk::Button::new();
+	let value_window = gtk::Box::new(gtk::Orientation::Vertical, 0);
 	
-	stack.add_titled(&value_button, "value_page", "Stock Value");
-	stack.add_titled(&graph_button, "graph_page", "Stock Graph");
+	let graph_window = gtk::Box::new(gtk::Orientation::Vertical, 0);
+	
+	stack.add_titled(&value_window, "value_page", "Stock Value");
+	stack.add_titled(&graph_window, "graph_page", "Stock Graph");
 	let stack_switcher = gtk::StackSwitcher::new();
 	stack_switcher.set_stack(Some(&stack));
 
