@@ -1,7 +1,6 @@
 extern crate gtk;
 extern crate gio;
 
-
 use gio::prelude::*;
 
 use std::env::args;
