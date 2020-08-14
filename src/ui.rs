@@ -7,22 +7,21 @@ pub fn build_ui(application: &gtk::Application) {
 
 //	Define Search Bar and Button
 	let search_bar = gtk::Entry::new();
-//	search_bar.set_activates_default(true);
-//	search_bar.set_width_chars(7);
+	search_bar.set_activates_default(true);
+	search_bar.set_width_chars(7);
 	
 	let search_button = gtk::Button::with_label("Search");
-//	search_button
-//		.get_style_context()
-//		.add_class(&STYLE_CLASS_SUGGESTED_ACTION);
+	search_button
+		.get_style_context()
+		.add_class(&STYLE_CLASS_SUGGESTED_ACTION);
 
 //	Value Section
 	
-//	let mut stock_value = "12.98";
-	let mut stock_code = "AMD".to_string();
+	let stock_value = "12.98";
+	let stock_code = "AMD";
 
 	search_button.connect_clicked(clone!(@weak search_bar => move |_| {
 		println!("{}", search_bar.get_text());
-		stock_code = search_bar.get_text().as_str().to_owned();
 	}));
 	
 	let stock_code_markup = format!("<span weight=\"heavy\" font=\"72\">{}</span>", stock_code);
