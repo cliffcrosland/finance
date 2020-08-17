@@ -1,7 +1,6 @@
 use gtk::prelude::*;
 use gtk::Label;
 
-
 pub fn build_ui(application: &gtk::Application) {
 //  Define Refresh Button
     let refresh_icon = gtk::Image::new();
@@ -22,7 +21,6 @@ pub fn build_ui(application: &gtk::Application) {
 	search_icon.set_from_icon_name(Some("system-search-symbolic"), gtk::IconSize::Button);
 
 	let search_button = gtk::ToggleButton::new();
-	search_button.get_style_context();
 	search_button.set_image(Some(&search_icon));
 	
 	search_button.connect_toggled({
@@ -38,6 +36,12 @@ pub fn build_ui(application: &gtk::Application) {
 			}
 		}
 	});
+
+    search_entry.connect_search_changed(move |entry| {
+        let en = entry.get_text();
+        println!("{}", en)
+    });
+
 
 //	Explore Section
 	let stock_value = crate::yfinance::get_quote();
