@@ -1,5 +1,5 @@
 use gtk::prelude::*;
-use gtk::{Label};
+use gtk::Label;
 
 
 pub fn build_ui(application: &gtk::Application) {
@@ -34,8 +34,8 @@ pub fn build_ui(application: &gtk::Application) {
 	});
 
 //	Explore Section
-	let stock_value = "12.98";
-	let stock_code = "AMD";
+	let stock_value = crate::yfinance::get_quote();
+    let stock_code = "AAPL";
 	
 	let stock_code_markup = format!("<span weight=\"heavy\" font=\"72\">{}</span>", stock_code);
 	let stock_value_markup = format!("<span font=\"12\">${}</span>", stock_value);
@@ -46,7 +46,7 @@ pub fn build_ui(application: &gtk::Application) {
 	let stock_value_label = Label::new(None);
 	stock_value_label.set_markup(&stock_value_markup);
 	
-	let explore_window = gtk::Box::new(gtk::Orientation::Vertical, 15);
+	let explore_window = gtk::Box::new(gtk::Orientation::Vertical, 0);
     explore_window.pack_start(&search_bar, false, false, 0);
 	explore_window.pack_start(&stock_code_label, false, false, 0);
 	explore_window.pack_start(&stock_value_label, false, false, 0);
@@ -55,7 +55,7 @@ pub fn build_ui(application: &gtk::Application) {
 	let portfolio_button = gtk::Button::new();
 	portfolio_button.set_label("graphs");
 
-	let portfolio_window = gtk::Box::new(gtk::Orientation::Vertical, 15);
+	let portfolio_window = gtk::Box::new(gtk::Orientation::Vertical, 0);
 	portfolio_window.set_center_widget(Some(&portfolio_button));
 
 //	Define HeaderBar Stack

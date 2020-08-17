@@ -7,6 +7,7 @@ use gtk::{SettingsExt, Settings};
 use std::env::args;
 
 mod ui;
+mod yfinance;
 
 fn main() {
 	let application = gtk::Application::new(Some("com.skylinecc.finance"), Default::default())
