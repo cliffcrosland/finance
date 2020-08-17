@@ -9,9 +9,9 @@ pub fn get_quote() -> std::string::String {
     // extract just the latest valid quote summery
     let quote = response.last_quote().unwrap();
 
-    let quote_close = quote.close;
+    let quote = quote.close;
 
-    let quote_close_rounded = format!("{:.2}", quote_close);
+    let quote_close = format!("{:.2}", quote);
 
-    return quote_close_rounded;
+    return quote_close;
 }

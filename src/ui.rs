@@ -3,6 +3,12 @@ use gtk::Label;
 
 
 pub fn build_ui(application: &gtk::Application) {
+//  Define Refresh Button
+    let refresh_icon = gtk::Image::new();
+    refresh_icon.set_from_icon_name(Some("view-refresh-symbolic"), gtk::IconSize::Button);
+
+    let refresh_button = gtk::Button::new();
+    refresh_button.set_image(Some(&refresh_icon));
 
 //	Define Search Bar and Button
 	let search_entry = gtk::SearchEntry::new();
@@ -75,7 +81,8 @@ pub fn build_ui(application: &gtk::Application) {
 	header_bar.set_title(Some("Finance"));
 	header_bar.set_show_close_button(true);
 	header_bar.set_custom_title(Some(&stack_switcher));
-	header_bar.add(&search_button);
+	header_bar.pack_start(&search_button);
+	header_bar.pack_end(&refresh_button);
 
 //	Basic ApplicationWindow properties
 	let window = gtk::ApplicationWindow::new(application);
