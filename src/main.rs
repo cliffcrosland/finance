@@ -25,7 +25,3 @@ fn main() {
 
 	application.run(&args().collect::<Vec<_>>());
 }
-
-pub fn pr() {
-	println!("Works in main.rs");
-}
