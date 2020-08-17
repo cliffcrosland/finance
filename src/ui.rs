@@ -2,6 +2,13 @@ use gtk::prelude::*;
 use gtk::Label;
 
 pub fn build_ui(application: &gtk::Application) {
+
+    let sidebar_icon = gtk::Image::new();
+    sidebar_icon.set_from_file("/usr/share/icons/hicolor/scalable/actions/view-left-pane-symbolic.svg");
+
+    let sidebar_button = gtk::Button::new();
+    sidebar_button.set_image(Some(&sidebar_icon));
+
 //  Define Refresh Button
     let refresh_icon = gtk::Image::new();
     refresh_icon.set_from_icon_name(Some("view-refresh-symbolic"), gtk::IconSize::Button);
@@ -85,6 +92,7 @@ pub fn build_ui(application: &gtk::Application) {
 	header_bar.set_title(Some("Finance"));
 	header_bar.set_show_close_button(true);
 	header_bar.set_custom_title(Some(&stack_switcher));
+    header_bar.pack_start(&sidebar_button);
 	header_bar.pack_start(&search_button);
 	header_bar.pack_end(&refresh_button);
 
