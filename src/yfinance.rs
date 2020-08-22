@@ -1,16 +1,15 @@
-pub fn get_quote() -> &'static str {
-//	let provider = yahoo::YahooConnector::new();
-	// get the latest quotes in 1 minute interval
+use serde_json::{Result, Value};
+use ureq;
 
-//	let response = tokio_test::block_on(provider.get_latest_quotes("AAPL", "1m")).unwrap();
-	//extract just the latest valid quote summery
-//	let quote = response.last_quote().unwrap();
+pub fn data() -> Result<()> {
+    // Some JSON input data as a &str. Maybe this comes from the user.
+	let data = ureq::get("https://query1.finance.yahoo.com/v8/finance/chart/AAPL").call().into_string().unwrap();
 
-//	let quote = quote.close;
+    // Parse the string of data into serde_json::Value.
+    let v: Value = serde_json::from_str(&data)?;
 
-//	let quote_close = format!("{:.2}", quote);
+    // Access parts of the data by indexing with square brackets.
+	println!("Market Price: {}", v["chart"]["result"][0]["meta"]["regularMarketPrice"]);
 
-	let quote_current = "400";
-
-	return quote_current;
+	Ok(())
 }

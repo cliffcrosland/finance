@@ -51,7 +51,7 @@ pub fn build_ui(application: &gtk::Application) {
 
 
 //	Explore Section
-	let stock_value = crate::yfinance::get_quote();
+	let stock_value = crate::yfinance::data().unwrap();
     let stock_code = "AAPL";
 	
 	let stock_code_markup = format!("<span weight=\"heavy\" font=\"72\">{}</span>", stock_code);
