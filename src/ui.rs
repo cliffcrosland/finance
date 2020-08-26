@@ -51,11 +51,11 @@ pub fn build_ui(application: &gtk::Application) {
 
 
 //	Explore Section
-	let stock_value = crate::yfinance::data().unwrap();
-    let stock_code = "AAPL";
+	let stock_symbol = "AAPL";
+	let stock_value = crate::yfin::quote(stock_symbol.to_string());
 	
-	let stock_code_markup = format!("<span weight=\"heavy\" font=\"72\">{}</span>", stock_code);
-	let stock_value_markup = format!("<span font=\"12\">${}</span>", stock_value);
+	let stock_code_markup = format!("<span weight=\"heavy\" font=\"72\">{}</span>", stock_symbol);
+	let stock_value_markup = format!("<span font=\"12\">{}</span>", stock_value);
 	
 	let stock_code_label = Label::new(None);
 	stock_code_label.set_markup(&stock_code_markup);
