@@ -20,7 +20,7 @@ pub fn build_ui(application: &gtk::Application) {
 	let search_entry = gtk::SearchEntry::new();
 	search_entry.set_activates_default(true);
 	search_entry.set_width_chars(35);
-	
+
 	let search_bar = gtk::SearchBar::new();
 	search_bar.add(&search_entry);
 
@@ -29,7 +29,7 @@ pub fn build_ui(application: &gtk::Application) {
 
 	let search_button = gtk::ToggleButton::new();
 	search_button.set_image(Some(&search_icon));
-	
+
 	search_button.connect_toggled({
 		let search_bar = search_bar.clone();
 		let search_entry = search_entry.clone();
@@ -52,17 +52,23 @@ pub fn build_ui(application: &gtk::Application) {
 
 //	Explore Section
 	let stock_symbol = "AAPL";
-	let stock_value = crate::yfin::quote(stock_symbol.to_string());
-	
+	let stock_value = match crate::yfin::quote(stock_symbol) {
+            Ok(stock_value) => stock_value,
+            Err(error_msg) => {
+                eprintln!("Error fetching stock_symbol {}. Error: {}", stock_symbol, error_msg);
+                "".to_string()
+            }
+        };
+
 	let stock_code_markup = format!("<span weight=\"heavy\" font=\"72\">{}</span>", stock_symbol);
 	let stock_value_markup = format!("<span font=\"12\">{}</span>", stock_value);
-	
+
 	let stock_code_label = Label::new(None);
 	stock_code_label.set_markup(&stock_code_markup);
-	
+
 	let stock_value_label = Label::new(None);
 	stock_value_label.set_markup(&stock_value_markup);
-	
+
 	let explore_window = gtk::Box::new(gtk::Orientation::Vertical, 0);
     explore_window.pack_start(&search_bar, false, false, 0);
 	explore_window.pack_start(&stock_code_label, false, false, 0);
